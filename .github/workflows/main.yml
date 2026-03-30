@@ -40,14 +40,20 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    
     - name: Build image
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: "${{ env.DOCKER_REPO }}:${{ steps.version.outputs.version }}"
+        tags: "${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKER_REPO }}:${{ steps.version.outputs.version }}"
         context: .
       env:
-        DOCKER_REPO: "edenbenayoun/java-hello-world"
+        DOCKER_REPO: "java-hello-world"
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
