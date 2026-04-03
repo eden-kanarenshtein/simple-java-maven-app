@@ -88,9 +88,9 @@ jobs:
         ECR_REPOSITORY: java-hello-world
 
     - name: Run Docker Container 
-      run: docker run my-image
+      run: docker run my-image --name my-container
 
     - name: Test
       run: |
-        if [[ -z $(docker logs my-image) ]]; then return 1; fi
+        if [[ -z $(docker logs my-container) ]]; then return 1; fi
       
