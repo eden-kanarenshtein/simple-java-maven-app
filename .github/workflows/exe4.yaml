@@ -45,12 +45,6 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v2
-      with:
-        role-to-assume: arn:aws:iam::319690731778:role/EC2RoleForECR
-        aws-region: us-east-1
-    
     - name: Build image
       uses: docker/build-push-action@v2
       with:
