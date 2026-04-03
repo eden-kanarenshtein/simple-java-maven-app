@@ -32,7 +32,7 @@ jobs:
       id: calculate-version
       uses: bitshifted/git-auto-semver@v2
       with:
-        main_branch: master
+        main_branch: AWS-Infrastructure
         create_tag: true
 
     - name: Set up JDK 21
